@@ -2,9 +2,14 @@
   "name": "react-native-clickio-sdk",
   "version": "1.0.0",
   "main": "lib/index.js",
-  "types": "lib/typescript/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "react-native": {
+    "android": "./android",
+    "ios": "./ios"
   },
   "files": [
     "lib"

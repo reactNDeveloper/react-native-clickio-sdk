@@ -1,0 +1,26 @@
+{
+  "name": "react-native-clickio-sdk",
+  "version": "1.0.0",
+  "main": "lib/commonjs/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "react-native",
+    "clickio",
+    "consent",
+    "sdk"
+  ],
+  "author": "Anna",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": ">=0.60.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

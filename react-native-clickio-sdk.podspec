@@ -12,11 +12,12 @@ Pod::Spec.new do |s|
   s.author       = { "Anna" => "sargsian.ann@gmail.com" }
   s.platforms    = { :ios => "12.0" }
 
-  # 👇 This is required to avoid validation error, even if not using git.
-  s.source       = { :git => 'https://example.com/does-not-matter.git', :tag => s.version.to_s }
+  s.source       = { :git => 'https://github.com/reactNDeveloper/react-native-clickio-sdk.git', :tag => s.version.to_s }
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
   s.requires_arc = true
 
   s.dependency "React-Core"
+  s.dependency 'ClickioConsentSDKManager'
+
 end

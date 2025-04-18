@@ -3,7 +3,6 @@
 #import <React/RCTEventDispatcher.h>
 #import <ClickioConsentSDKManager/ClickioConsentSDKManager-umbrella.h>
 
-// This file should NOT contain the @interface declaration for the module
 @interface RCT_EXTERN_MODULE(ClickioConsentManagerModule, NSObject)
 
 // Declare the methods you want to expose to React Native here

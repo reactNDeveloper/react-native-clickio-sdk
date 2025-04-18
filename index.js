@@ -9,7 +9,8 @@ const NativeModule = isIOS ? ClickioConsentManagerModule : ClickioSDKModule;
 const initializeSDK = async (siteId, language) => {
   if (isIOS) {
     await NativeModule.requestATTPermission();
-    return NativeModule.initializeConsentSDK();
+    NativeModule.initializeConsentSDK();
+    return openConsentDialog();
   } else {
     NativeModule.initializeSDK(siteId, language);
     return new Promise((resolve) => {

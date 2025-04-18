@@ -1,5 +1,4 @@
-//
- ClickioConsentManagerBridge.h
+// ClickioConsentManagerBridge.h
 //  clickioapp
 //
 //  Created by Admin on 02.04.25.

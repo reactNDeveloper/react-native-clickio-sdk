@@ -1,41 +1,45 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// react-native-clickio-sdk/android/build.gradle
+
+apply plugin: 'com.android.library'
 
 buildscript {
     ext {
-        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '35.0.0'
-        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
-        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
-        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
-        kotlinVersion = findProperty('android.kotlinVersion') ?: '1.9.25'
-
-        ndkVersion = "26.1.10909125"
-    }
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath('com.android.tools.build:gradle')
-        classpath('com.facebook.react:react-native-gradle-plugin')
-        classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+        buildToolsVersion = "34.0.0"
+        minSdkVersion = 21
+        compileSdkVersion = 34
+        targetSdkVersion = 34
     }
 }
 
-apply plugin: "com.facebook.react.rootproject"
+android {
+     namespace 'com.clickio.clickioapp'
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
-allprojects {
-    repositories {
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
-        }
-        maven {
-            // Android JSC is installed from npm
-            url(new File(['node', '--print', "require.resolve('jsc-android/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim(), '../dist'))
-        }
-
-        google()
-        mavenCentral()
-        maven { url 'https://www.jitpack.io' }
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
     }
+
+repositories {
+    mavenCentral() // or jitpack.io or any other hosting service
+}
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+        }
+    }
+}
+
+dependencies {
+    implementation "com.facebook.react:react-native:+"
+ implementation "com.clickio:clickioconsentsdk:1.0.0-rc2"
+    // Include Clickio Consent SDK dependency if needed
+    // implementation 'com.clickio:consent-sdk:x.y.z' ← replace with real version
+
+    // Optional: for Firebase/Adjust/Airbridge if you want to test SDK integration
+    // implementation 'com.google.firebase:firebase-analytics'
+    // implementation 'com.adjust.sdk:adjust-android'
+    // implementation 'io.airbridge:sdk-android'
+    // implementation 'com.appsflyer:af-android-sdk'
 }

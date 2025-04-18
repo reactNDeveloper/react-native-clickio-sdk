@@ -1,31 +1,27 @@
 {
   "name": "react-native-clickio-sdk",
   "version": "1.0.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build"
-  },
+  "main": "index.js",
+  "source": "index.js",
+  "types": "index.d.ts",
   "react-native": {
-    "android": "./android",
-    "ios": "./ios"
+    "android": {
+      "packageInstance": "new ClickioSDKPackage()"
+    },
+    "ios": {
+      "sourceDir": "ios"
+    }
   },
-  "files": [
-    "lib"
-  ],
+  "scripts": {
+    "build": "tsc"
+  },
   "keywords": [
     "react-native",
     "clickio",
     "consent",
     "sdk"
   ],
-  "author": "Anna",
-  "license": "MIT",
   "peerDependencies": {
-    "react-native": ">=0.60.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.0"
+    "react-native": ">=0.72.0"
   }
 }

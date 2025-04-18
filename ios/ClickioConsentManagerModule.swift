@@ -192,35 +192,35 @@ class ClickioConsentManagerModule: NSObject {
      
    }
   
-   @ReactMethod
-    public void getGoogleConsentFlags(Promise promise) {
-        try {
-            boolean purpose1 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(1);
-            boolean purpose3 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(3);
-            boolean purpose4 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(4);
-            boolean purpose7 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(7);
-            boolean purpose8 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(8);
-            boolean purpose9 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(9);
+  //  @ReactMethod
+  //   public void getGoogleConsentFlags(Promise promise) {
+  //       try {
+  //           boolean purpose1 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(1);
+  //           boolean purpose3 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(3);
+  //           boolean purpose4 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(4);
+  //           boolean purpose7 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(7);
+  //           boolean purpose8 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(8);
+  //           boolean purpose9 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(9);
 
-            String granted = "GRANTED";
-            String denied = "DENIED";
+  //           String granted = "GRANTED";
+  //           String denied = "DENIED";
 
-            String adStorage = (purpose1) ? granted : denied;
-            String adUserData = (purpose1 && purpose7) ? granted : denied;
-            String adPersonalization = (purpose3 && purpose4) ? granted : denied;
-            String analyticsStorage = (purpose8 && purpose9) ? granted : denied;
+  //           String adStorage = (purpose1) ? granted : denied;
+  //           String adUserData = (purpose1 && purpose7) ? granted : denied;
+  //           String adPersonalization = (purpose3 && purpose4) ? granted : denied;
+  //           String analyticsStorage = (purpose8 && purpose9) ? granted : denied;
 
-            // Convert to WritableMap for JS side
-            WritableMap result = Arguments.createMap();
-            result.putString("adStorage", adStorage);
-            result.putString("adUserData", adUserData);
-            result.putString("adPersonalization", adPersonalization);
-            result.putString("analyticsStorage", analyticsStorage);
+  //           // Convert to WritableMap for JS side
+  //           WritableMap result = Arguments.createMap();
+  //           result.putString("adStorage", adStorage);
+  //           result.putString("adUserData", adUserData);
+  //           result.putString("adPersonalization", adPersonalization);
+  //           result.putString("analyticsStorage", analyticsStorage);
 
-            promise.resolve(result);
-        } catch (Exception e) {
-            promise.reject("CONSENT_ERROR", "Failed to get Google Consent flags", e);
-        }
-    }
+  //           promise.resolve(result);
+  //       } catch (Exception e) {
+  //           promise.reject("CONSENT_ERROR", "Failed to get Google Consent flags", e);
+  //       }
+  //   }
     
 }

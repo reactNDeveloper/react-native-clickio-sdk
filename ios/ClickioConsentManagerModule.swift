@@ -75,7 +75,6 @@ class ClickioConsentManagerModule: NSObject {
         mode: .resurface,    //default
         in: rootViewController,
         showATTFirst: true,
-        alwaysShowCMP: true,
         attNeeded: true
       )
 

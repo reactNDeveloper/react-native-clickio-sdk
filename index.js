@@ -5,6 +5,22 @@ const { ClickioSDKModule, ClickioConsentManagerModule } = NativeModules;
 const isIOS = Platform.OS === "ios";
 const NativeModule = isIOS ? ClickioConsentManagerModule : ClickioSDKModule;
 
+// ---------- Consent Dialog ----------
+const openConsentDialog = () => {
+  return new Promise((resolve, reject) => {
+    try {
+      NativeModule.openDialog((response) => {
+        if (response.status === "success") {
+          resolve(response);
+        } else {
+          reject(response);
+        }
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 // ---------- SDK Initialization ----------
 const initializeSDK = async (siteId, language) => {
   if (isIOS) {
@@ -21,23 +37,6 @@ const initializeSDK = async (siteId, language) => {
 
 const testModule = () => {
   return "everything works";
-};
-
-// ---------- Consent Dialog ----------
-const openConsentDialog = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      NativeModule.openDialog((response) => {
-        if (response.status === "success") {
-          resolve(response);
-        } else {
-          reject(response);
-        }
-      });
-    } catch (error) {
-      reject(error);
-    }
-  });
 };
 
 // ---------- Logging (Android only) ----------

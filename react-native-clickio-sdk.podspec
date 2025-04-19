@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
 s.dependency "React-Codegen"
   s.dependency "ReactCommon"
   s.dependency "React-Core/DevSupport"
+  s.dependency "ClickioConsentSDKManager"
 
   s.swift_version = "5.0"
 

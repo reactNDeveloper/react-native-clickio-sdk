@@ -17,7 +17,19 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
   s.requires_arc = true
 
+  .source_files = "ios/**/*.{h,m,swift}"
   s.dependency "React-Core"
-  s.dependency 'ClickioConsentSDKManager'
+  s.dependency "React-RCTBridge"
+  s.dependency "ReactCommon"
+  s.dependency "React-Core/DevSupport"
 
+  s.swift_version = "5.0"
+
+ s.pod_target_xcconfig = {
+    'DEFINES_MODULE' => 'YES'
+  }
+
+  s.resource_bundles = {
+    'ClickioAssets' => ['ios/**/*.{xib,storyboard,xcassets,json}']
+  }
 end

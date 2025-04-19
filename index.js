@@ -5,30 +5,18 @@ const { ClickioSDKModule, ClickioConsentManagerModule } = NativeModules;
 const isIOS = Platform.OS === "ios";
 const NativeModule = isIOS ? ClickioConsentManagerModule : ClickioSDKModule;
 
-function getNativeModule() {
-  const native = NativeModules.ClickioConsentManagerModule;
-  if (!native) {
-    throw new Error(
-      "ClickioConsentManagerModule is undefined. Make sure the native module is linked correctly."
-    );
-  }
-  return native;
-}
-
 // ---------- Consent Dialog ----------
 const openConsentDialog = () => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     try {
-      const NativeModuleIos = getNativeModule();
-      await NativeModuleIos.openDialog();
-      // NativeModuleIos.openDialog((response) => {
-      //   console.log("openDialog:response", response);
-      //   if (response.status === "success") {
-      //     resolve(response);
-      //   } else {
-      //     reject(response);
-      //   }
-      // });
+      NativeModule.openDialog((response) => {
+        console.log("openDialog:response", response);
+        if (response.status === "success") {
+          resolve(response);
+        } else {
+          reject(response);
+        }
+      });
     } catch (error) {
       console.log("openDialog:error", error);
       reject(error);
@@ -40,10 +28,8 @@ const openConsentDialog = () => {
 const initializeSDK = async (siteId, language) => {
   if (isIOS) {
     try {
-      const NativeModuleIos = getNativeModule();
-
-      await NativeModuleIos.requestATTPermission();
-      await NativeModuleIos.initializeConsentSDK();
+      await NativeModule.requestATTPermission();
+      await NativeModule.initializeConsentSDK();
       return openConsentDialog();
     } catch (error) {
       console.log("initializeSDK::", error);

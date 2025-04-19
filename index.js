@@ -30,6 +30,7 @@ const initializeSDK = async (siteId, language) => {
       await NativeModule.initializeConsentSDK();
       return openConsentDialog();
     } catch (error) {
+      console.log("initializeSDK::", error);
       throw error;
     }
   } else {

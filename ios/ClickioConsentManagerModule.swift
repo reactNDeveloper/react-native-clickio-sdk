@@ -77,6 +77,7 @@ class ClickioConsentManagerModule: NSObject {
         showATTFirst: true,
         attNeeded: true
       )
+print("Attempting to open Clickio Consent Dialog")
 
       callback([["status": "success", "message": "Consent Dialog Opened"]])
     } else {

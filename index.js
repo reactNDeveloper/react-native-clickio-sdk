@@ -17,18 +17,18 @@ function getNativeModule() {
 
 // ---------- Consent Dialog ----------
 const openConsentDialog = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const NativeModuleIos = getNativeModule();
-
-      NativeModuleIos.openDialog((response) => {
-        console.log("openDialog:response", response);
-        if (response.status === "success") {
-          resolve(response);
-        } else {
-          reject(response);
-        }
-      });
+      await NativeModuleIos.openDialog();
+      // NativeModuleIos.openDialog((response) => {
+      //   console.log("openDialog:response", response);
+      //   if (response.status === "success") {
+      //     resolve(response);
+      //   } else {
+      //     reject(response);
+      //   }
+      // });
     } catch (error) {
       console.log("openDialog:error", error);
       reject(error);

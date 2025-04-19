@@ -21,16 +21,25 @@ const openConsentDialog = () => {
     }
   });
 };
+
 // ---------- SDK Initialization ----------
 const initializeSDK = async (siteId, language) => {
   if (isIOS) {
-    await NativeModule.requestATTPermission();
-    NativeModule.initializeConsentSDK();
-    return openConsentDialog();
+    try {
+      await NativeModule.requestATTPermission();
+      await NativeModule.initializeConsentSDK();
+      return openConsentDialog();
+    } catch (error) {
+      throw error;
+    }
   } else {
-    NativeModule.initializeSDK(siteId, language);
-    return new Promise((resolve) => {
-      NativeModule.onReady((msg) => resolve(msg));
+    return new Promise((resolve, reject) => {
+      try {
+        NativeModule.initializeSDK(siteId, language);
+        NativeModule.onReady((msg) => resolve(msg));
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 };

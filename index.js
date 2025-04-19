@@ -10,7 +10,7 @@ const openConsentDialog = () => {
   return new Promise((resolve, reject) => {
     try {
       NativeModule.openDialog((response) => {
-        console.log("openDialog:response", response);
+        console.log("response,NativeModule.openDialog::", response);
         if (response.status === "success") {
           resolve(response);
         } else {
@@ -18,18 +18,18 @@ const openConsentDialog = () => {
         }
       });
     } catch (error) {
-      console.log("openDialog:error", error);
+      console.log("NativeModule.openDialog::", error);
       reject(error);
     }
   });
 };
-
 // ---------- SDK Initialization ----------
 const initializeSDK = async (siteId, language) => {
   if (isIOS) {
     try {
       await NativeModule.requestATTPermission();
-      await NativeModule.initializeConsentSDK();
+      const result = await NativeModule.initializeConsentSDK();
+      console.log("iOS SDK init result:", result);
       return openConsentDialog();
     } catch (error) {
       console.log("initializeSDK::", error);

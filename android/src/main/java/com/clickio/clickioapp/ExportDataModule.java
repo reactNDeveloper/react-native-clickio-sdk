@@ -3,7 +3,7 @@ package com.clickio.clickioapp;
 import androidx.annotation.NonNull;
 
 import com.clickio.clickioconsentsdk.ExportData;
-import com.clickio.clickioconsentsdk.GoogleConsentStatus; // Ensure this is the correct import
+import com.clickio.clickioconsentsdk.GoogleConsentStatus; 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -34,7 +34,7 @@ public class ExportDataModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getGoogleConsentMode(Promise promise) {
         try {
-            GoogleConsentStatus consentStatus = exportData.getGoogleConsentMode(); // Make sure this returns GoogleConsentStatus
+            GoogleConsentStatus consentStatus = exportData.getGoogleConsentMode();
 
             WritableMap result = Arguments.createMap();
             if (consentStatus != null) {
@@ -52,7 +52,7 @@ public class ExportDataModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getConsentedTCFPurposes(Promise promise) {
         try {
-            Set<Integer> purposes = new HashSet<>(exportData.getConsentedTCFPurposes()); // Convert List to Set
+            Set<Integer> purposes = new HashSet<>(exportData.getConsentedTCFPurposes()); 
             WritableArray result = Arguments.createArray();
             for (Integer purpose : purposes) {
                 result.pushInt(purpose);
@@ -66,7 +66,7 @@ public class ExportDataModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getConsentedTCFVendors(Promise promise) {
         try {
-            Set<Integer> vendors = new HashSet<>(exportData.getConsentedTCFVendors()); // Convert List to Set
+            Set<Integer> vendors = new HashSet<>(exportData.getConsentedTCFVendors());
             WritableArray result = Arguments.createArray();
             for (Integer vendor : vendors) {
                 result.pushInt(vendor);
@@ -82,7 +82,6 @@ public class ExportDataModule extends ReactContextBaseJavaModule {
         try {
             WritableMap result = Arguments.createMap();
 
-            // Get Google Consent Status
             GoogleConsentStatus consentStatus = exportData.getGoogleConsentMode();
             if (consentStatus != null) {
                 result.putBoolean("adStorageGranted", consentStatus.getAdStorageGranted());
@@ -91,7 +90,6 @@ public class ExportDataModule extends ReactContextBaseJavaModule {
                 result.putBoolean("adPersonalizationGranted", consentStatus.getAdPersonalizationGranted());
             }
 
-            // Helper function to safely add lists to WritableArray
             WritableArray purposesArray = createWritableArray(exportData.getConsentedTCFPurposes());
             result.putArray("consentedTCFPurposes", purposesArray);
 
@@ -126,12 +124,10 @@ public class ExportDataModule extends ReactContextBaseJavaModule {
         }
     }
 
-    /**
-     * Helper function to safely convert a List<Integer> to a WritableArray.
-     */
+  
     private WritableArray createWritableArray(List<Integer> list) {
         WritableArray array = Arguments.createArray();
-        if (list != null) { // Check for null before iterating
+        if (list != null) { 
             for (Integer value : list) {
                 array.pushInt(value);
             }

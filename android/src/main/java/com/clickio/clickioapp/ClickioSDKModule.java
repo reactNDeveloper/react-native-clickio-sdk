@@ -215,13 +215,6 @@ public void getGoogleConsentFlags(Promise promise) {
                         consentSettings.put(adPersonalizationEnum, adPersonalization.equals(granted) ? grantedEnum : deniedEnum);
                         consentSettings.put(analyticsEnum, analyticsStorage.equals(granted) ? grantedEnum : deniedEnum);
                         //ADD your analitics set concent here 
-                        // firebaseAnalyticsClass.getMethod("getInstance", Context.class)
-                        //         .invoke(null, getReactApplicationContext())
-                        //         .getClass()
-                        //         .getMethod("setConsent", Map.class)
-                        //         .invoke(firebaseAnalyticsClass.getMethod("getInstance", Context.class)
-                        //                 .invoke(null, getReactApplicationContext()), consentSettings);
-
                         Log.d(TAG, "Firebase consent synced");
                          promise.resolve("Firebase consent synced");
                     } catch (ClassNotFoundException e) {

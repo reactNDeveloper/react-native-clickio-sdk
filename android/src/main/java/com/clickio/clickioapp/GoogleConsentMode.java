@@ -16,7 +16,7 @@ public class GoogleConsentMode {
         this.adPersonalizationGranted = adPersonalization;
     }
 
-    // Convert from GoogleConsentStatus
+   
     public static GoogleConsentMode fromGoogleConsentStatus(GoogleConsentStatus status) {
         return new GoogleConsentMode(
             status.getAdStorageGranted(),

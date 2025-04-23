@@ -1,20 +1,8 @@
-// #import "ClickioConsentManagerModule.h"
+
 #import <React/RCTLog.h>
-// #import <ClickioConsentSDKManager/ClickioConsentSDKManager-umbrella.h>
 #import <React/RCTBridgeModule.h>
 
-// @implementation ClickioConsentManagerModule
 
-// // Example method you want to expose
-// RCT_EXPORT_METHOD(showConsentDialog)
-// {
-//     // Code to show consent dialog
-//     RCTLogInfo(@"Showing consent dialog");
-// }
-
-// // You can implement other methods in the future similarly
-
-// @end
 
 
 @interface RCT_EXTERN_MODULE(ClickioConsentManagerModule, NSObject)

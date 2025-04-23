@@ -178,3 +178,18 @@ const checkSDKs = async () => {
 ```
 
 The SDK will automatically set the correct consent mode values for each integration if available, ensuring compliance without additional configuration.
+
+### Firebase Analytics Integration
+
+If the **Firebase Analytics SDK** is present in the project, the Clickio SDK will automatically send Google Consent flags to Firebase **if Google Consent Mode integration is enabled**.
+
+- Consent flags are sent:
+
+  - Immediately after the user gives or updates consent (when `onConsentUpdated` is triggered).
+  - During initialization if the consent has already been accepted.
+
+- After successfully transmitting the flags:
+  - A log message will appear (if logging is enabled).
+  - If an error occurs, an error message will appear in the logs.
+
+> 🔄 Make sure you're using a compatible version of Firebase Analytics. You may need to update to the latest version if issues arise.

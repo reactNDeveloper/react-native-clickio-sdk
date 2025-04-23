@@ -5,6 +5,36 @@ This SDK supports integrations with third-party tools like Firebase, Adjust, Air
 
 ---
 
+## ⚠️ Requirements
+
+Before integrating the ClickioConsentSdk (hereinafter referred to as the **Clickio SDK**), ensure that your React Native application meets the following requirements:
+
+### Android
+
+- **Minimum SDK Version**: 21 (Android 5.0)
+- **Target/Compile SDK Version**: The minimum required for Google Play compliance.
+- **Permissions**: Add the following to your `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+```
+
+---
+
+### iOS
+
+- **Minimum iOS Version**: 15.0+
+- **Swift Version**: 5.0+
+- **Permissions**: Add the following to your `Info.plist`:
+
+```xml
+<key>NSUserTrackingUsageDescription</key>
+<string>Add your data usage description</string>
+```
+
+---
+
 ## 📦 Installation
 
 ```bash
@@ -41,6 +71,10 @@ s.dependency 'ClickioConsentSDK'
 
 ### Android
 
+# Linking (React Native 0.59 and below)
+
+If you are using React Native 0.59 or below, you need to link the native modules manually:
+
 In your `android/build.gradle`:
 
 ```gradle
@@ -61,8 +95,6 @@ dependencies {
 ```
 
 ---
-
-## ✅ Usage
 
 ### Initialization
 
@@ -100,7 +132,7 @@ await setClickioLogging(true); // Enables verbose mode in native SDK logs
 
 ---
 
-## 🔍 Utility Methods
+## Utility Methods
 
 These native methods are available to get consent data and check vendor status:
 
@@ -123,26 +155,26 @@ These native methods are available to get consent data and check vendor status:
 | `isAirbridgeAvailable()`           | Checks for Airbridge SDK                          |
 | `isAppsFlyerAvailable()`           | Checks for AppsFlyer SDK                          |
 
----
+## 🤝 Integration with Third-Party Libraries for Google Consent Mode
 
-## 📲 Activity Lifecycle (Android)
+The Clickio SDK supports automatic configuration of Google Consent Mode for a variety of popular SDKs. You can programmatically check if the SDKs are linked in your app using helper functions:
 
-Your module correctly hooks into `onAttachedToActivity`, `onDetachedFromActivity`, etc., so you don't need extra setup for lifecycle management.
+```ts
+import {
+  isFirebaseAnalyticsAvailable,
+  isAdjustAvailable,
+  isAirbridgeAvailable,
+  isAppsFlyerAvailable,
+} from "react-native-clickio-sdk";
 
----
+const checkSDKs = async () => {
+  const firebase = await isFirebaseAnalyticsAvailable();
+  const adjust = await isAdjustAvailable();
+  const airbridge = await isAirbridgeAvailable();
+  const appsFlyer = await isAppsFlyerAvailable();
 
-## 🔧 Customization
+  console.log({ firebase, adjust, airbridge, appsFlyer });
+};
+```
 
-If you want to configure additional parameters or SDK options like `showATTFirst`, you can expose those via module methods in future updates.
-
----
-
-## 📤 Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## 🧾 License
-
-MIT © 2025 — Built by [Your Name or Company]
+The SDK will automatically set the correct consent mode values for each integration if available, ensuring compliance without additional configuration.

@@ -10,7 +10,6 @@ const openConsentDialog = () => {
   return new Promise((resolve, reject) => {
     try {
       NativeModule.openDialog((response) => {
-        console.log("response,NativeModule.openDialog::", response);
         if (response.status === "success") {
           resolve(response);
         } else {

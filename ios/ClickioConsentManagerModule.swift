@@ -39,17 +39,18 @@ class ClickioConsentManagerModule: NSObject {
     }
 
   
-  @objc
+   @objc
    func setClickioLogging(_ isEnabled: Bool) {
      let mode: EventLogger.Mode = isEnabled ? .verbose : .disabled
      ClickioConsentSDK.shared.setLogsMode(mode)
    }
   
+  
   @objc
   func initializeConsentSDK(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     let config = ClickioConsentSDK.Config(siteId: "241131", appLanguage: "en")
-    
-    ClickioConsentSDK.shared.setLogsMode(.verbose)
+     setClickioLogging(true)
+   
 
     DispatchQueue.main.async {
       do {
@@ -77,8 +78,6 @@ class ClickioConsentManagerModule: NSObject {
         showATTFirst: true,
         attNeeded: true
       )
-print("Attempting to open Clickio Consent Dialog")
-
       callback([["status": "success", "message": "Consent Dialog Opened"]])
     } else {
       callback([["status": "error", "message": "Failed to find root view controller"]])
@@ -160,7 +159,7 @@ print("Attempting to open Clickio Consent Dialog")
 
        
          print("Google Consent Mode is disabled — sending flags manually.")
-//    Analytics.setConsent(consentSettings)
+        //   add your Analytics set consent here
     
   }
   
@@ -191,36 +190,5 @@ print("Attempting to open Clickio Consent Dialog")
   resolve(available)
      
    }
-  
-  //  @ReactMethod
-  //   public void getGoogleConsentFlags(Promise promise) {
-  //       try {
-  //           boolean purpose1 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(1);
-  //           boolean purpose3 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(3);
-  //           boolean purpose4 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(4);
-  //           boolean purpose7 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(7);
-  //           boolean purpose8 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(8);
-  //           boolean purpose9 = ClickioConsentSDK.Companion.getInstance().checkConsentForPurpose(9);
 
-  //           String granted = "GRANTED";
-  //           String denied = "DENIED";
-
-  //           String adStorage = (purpose1) ? granted : denied;
-  //           String adUserData = (purpose1 && purpose7) ? granted : denied;
-  //           String adPersonalization = (purpose3 && purpose4) ? granted : denied;
-  //           String analyticsStorage = (purpose8 && purpose9) ? granted : denied;
-
-  //           // Convert to WritableMap for JS side
-  //           WritableMap result = Arguments.createMap();
-  //           result.putString("adStorage", adStorage);
-  //           result.putString("adUserData", adUserData);
-  //           result.putString("adPersonalization", adPersonalization);
-  //           result.putString("analyticsStorage", analyticsStorage);
-
-  //           promise.resolve(result);
-  //       } catch (Exception e) {
-  //           promise.reject("CONSENT_ERROR", "Failed to get Google Consent flags", e);
-  //       }
-  //   }
-    
 }

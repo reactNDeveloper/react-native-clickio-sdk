@@ -157,18 +157,28 @@ These native methods are available to get consent data and check vendor status:
 
 ## 🤝 Integration with Third-Party Libraries for Google Consent Mode
 
-The Clickio SDK supports automatic configuration of Google Consent Mode for a variety of popular SDKs. You can programmatically check if the SDKs are linked in your app using helper functions:
+### :rocket: Adjust, Airbridge, AppsFlyer
+
+If your project includes any of these SDKs **(Adjust, Airbridge, AppsFlyer)**, `ClickioConsentSDK` will automatically send Google Consent flags to them if _Clickio Google Consent Mode_ integration is **enabled**.
+
+#### :warning: Important:
+
+- Interactions with `ClickioConsentSDK` should be performed **after initializing the third-party SDKs** since `ClickioConsentSDK` only transmits consent flags.
+- **Ensure** that you have completed the required tracking setup for Adjust, Airbridge, or AppsFlyer before integrating `ClickioConsentSDK`. This includes proper initialization and configuration of the SDK according to the vendor’s documentation.
+- If you're using **AppsFlyer** and need to support GDPR compliance via TCF, make sure to enable TCF data collection before SDK initialization: `enableTCFDataCollection(true)`. This allows AppsFlyer to automatically gather consent values (like `tcString`) from the CMP.
+  After successfully transmitting the flags, a log message will be displayed **(if logging is enabled)** to confirm the successful transmission. In case of an error, an error message will appear in the logs.
+  > :bulb: **Note:** Keep your **Adjust**, **Airbridge**, or **AppsFlyer SDK** updated to ensure compatibility
 
 ```ts
 import {
-  isFirebaseAnalyticsAvailable,
+  isFirebaseAvailable,
   isAdjustAvailable,
   isAirbridgeAvailable,
   isAppsFlyerAvailable,
 } from "react-native-clickio-sdk";
 
 const checkSDKs = async () => {
-  const firebase = await isFirebaseAnalyticsAvailable();
+  const firebase = await isFirebaseAvailable();
   const adjust = await isAdjustAvailable();
   const airbridge = await isAirbridgeAvailable();
   const appsFlyer = await isAppsFlyerAvailable();

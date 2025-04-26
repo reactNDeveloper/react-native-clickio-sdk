@@ -15,7 +15,6 @@ declare module "react-native-clickio-sdk" {
   export function isAdjustAvailable(): Promise<boolean>;
   export function isAirbridgeAvailable(): Promise<boolean>;
   export function isAppsFlyerAvailable(): Promise<boolean>;
-  export function testModule(): any;
   export function sendManualConsentToFirebase(
     consent: Record<string, boolean>
   ): void;

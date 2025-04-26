@@ -46,10 +46,6 @@ const initializeSDK = async (siteId, language) => {
   }
 };
 
-const testModule = () => {
-  return "everything works";
-};
-
 // ---------- Logging (Android only) ----------
 const startLoggingLogsFromAndroid = () => {
   if (!isIOS) {

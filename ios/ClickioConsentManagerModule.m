@@ -8,8 +8,9 @@
 @interface RCT_EXTERN_MODULE(ClickioConsentManagerModule, NSObject)
 
 RCT_EXTERN_METHOD(testConnection:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
-RCT_EXTERN_METHOD(initializeConsentSDK:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
-RCT_EXTERN_METHOD(openDialog:(RCTResponseSenderBlock)callback)
+RCT_EXTERN_METHOD(initializeConsentSDK:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)RCT_EXTERN_METHOD(openDialog:(RCTResponseSenderBlock)callback)
 RCT_EXTERN_METHOD(getConsentData:(RCTResponseSenderBlock)callback)
 RCT_EXTERN_METHOD(requestATTPermission:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)

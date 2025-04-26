@@ -46,23 +46,28 @@ class ClickioConsentManagerModule: NSObject {
    }
   
   
-  @objc
-  func initializeConsentSDK(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-    let config = ClickioConsentSDK.Config(siteId: "241131", appLanguage: "en")
-     setClickioLogging(true)
-   
+@objc
+func initializeConsentSDK(_ options: NSDictionary,
+                          resolve: @escaping RCTPromiseResolveBlock,
+                          reject: @escaping RCTPromiseRejectBlock) {
 
-    DispatchQueue.main.async {
-      do {
-        Task{
-        
-          await  ClickioConsentSDK.shared.initialize(configuration: config)
-        }
-        resolve("ClickioConsentSDK initialized")
-      }
-    }
-
+  guard let siteId = options["siteId"] as? String else {
+    reject("E_MISSING_SITE_ID", "Missing required siteId", nil)
+    return
   }
+
+  let appLanguage = options["appLanguage"] as? String ?? "en"
+  let config = ClickioConsentSDK.Config(siteId: siteId, appLanguage: appLanguage)
+  
+  setClickioLogging(true)
+
+  DispatchQueue.main.async {
+    Task {
+      await ClickioConsentSDK.shared.initialize(configuration: config)
+      resolve("ClickioConsentSDK initialized with siteId: \(siteId) and language: \(appLanguage)")
+    }
+  }
+}
 
  @objc func openDialog(_ callback: @escaping RCTResponseSenderBlock) {
   DispatchQueue.main.async {
@@ -138,7 +143,6 @@ class ClickioConsentManagerModule: NSObject {
          let purpose8 = ClickioConsentSDK.shared.checkConsentForPurpose(purposeId: 8) ?? false
          let purpose9 = ClickioConsentSDK.shared.checkConsentForPurpose(purposeId: 9)
 
-         // Step 2: Evaluate Google Consent Mode flags
          let adStorageGranted = purpose1
          let adUserDataGranted = purpose1 && (purpose7 != nil)
          let adPersonalizationGranted = purpose3 && (purpose4 != nil)
@@ -190,5 +194,17 @@ class ClickioConsentManagerModule: NSObject {
   resolve(available)
      
    }
+   private func getGoogleConsentMode(result: Any) {
+     let exportDataPrivate = ClickioConsentSDKManager.ExportData()
+    let googleConsent = exportDataPrivate.getGoogleConsentMode()
+    let formatted = """
+      Analytics Storage: \(googleConsent?.analyticsStorageGranted ?? false),
+      Ad Storage: \(googleConsent?.adStorageGranted ?? false),
+      Ad User Data: \(googleConsent?.adUserDataGranted ?? false),
+      Ad Personalization: \(googleConsent?.adPersonalizationGranted ?? false)
+      """
+
+    result(formatted)
+  }
 
 }

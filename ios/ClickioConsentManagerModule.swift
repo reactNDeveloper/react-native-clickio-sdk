@@ -80,7 +80,6 @@ func initializeConsentSDK(_ options: NSDictionary,
       ClickioConsentSDK.shared.openDialog(
         mode: .resurface,    //default
         in: rootViewController,
-        showATTFirst: true,
         attNeeded: true
       )
       callback([["status": "success", "message": "Consent Dialog Opened"]])

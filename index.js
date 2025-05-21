@@ -42,7 +42,10 @@ const initializeSDK = async (siteId, language = "en") => {
       await NativeModule.requestATTPermission();
 
       // Initialize SDK with siteId and language
-      const result = await NativeModule.initializeConsentSDK(siteId, language);
+      const result = await NativeModule.initializeConsentSDK({
+        siteId,
+        language,
+      });
       console.log("iOS SDK init result:", result);
 
       // Show consent dialog after initialization

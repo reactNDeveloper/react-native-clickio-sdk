@@ -69,7 +69,7 @@ func initializeConsentSDK(_ options: NSDictionary,
 }
 
 
- @objc func openDialog(_ callback: @escaping RCTResponseSenderBlock) {
+@objc func openDialog(_ callback: @escaping RCTResponseSenderBlock) {
   DispatchQueue.main.async {
     if let rootViewController = UIApplication.shared.connectedScenes
         .compactMap({ $0 as? UIWindowScene })

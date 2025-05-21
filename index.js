@@ -13,14 +13,25 @@ const NativeModule = isIOS ? ClickioConsentManagerModule : ClickioSDKModule;
 const openConsentDialog = () => {
   return new Promise((resolve, reject) => {
     try {
-      NativeModule.openDialog((response) => {
-        // Handle response based on status
-        if (response.status === "success") {
-          resolve(response);
-        } else {
-          reject(new Error(`Consent Dialog failed: ${response.status}`));
-        }
-      });
+      if (isIOS) {
+        NativeModule.openConsentDialog((response) => {
+          // Handle response based on status
+          if (response.status === "success") {
+            resolve(response);
+          } else {
+            reject(new Error(`Consent Dialog failed: ${response.status}`));
+          }
+        });
+      } else {
+        NativeModule.openDialog((response) => {
+          // Handle response based on status
+          if (response.status === "success") {
+            resolve(response);
+          } else {
+            reject(new Error(`Consent Dialog failed: ${response.status}`));
+          }
+        });
+      }
     } catch (error) {
       console.error("NativeModule.openDialog::", error);
       reject(error); // Reject with the error

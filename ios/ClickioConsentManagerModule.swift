@@ -50,7 +50,6 @@ class ClickioConsentManagerModule: NSObject {
 func initializeConsentSDK(_ options: NSDictionary,
                           resolve: @escaping RCTPromiseResolveBlock,
                           reject: @escaping RCTPromiseRejectBlock) {
-
   guard let siteId = options["siteId"] as? String else {
     reject("E_MISSING_SITE_ID", "Missing required siteId", nil)
     return
@@ -58,7 +57,7 @@ func initializeConsentSDK(_ options: NSDictionary,
 
   let appLanguage = options["appLanguage"] as? String ?? "en"
   let config = ClickioConsentSDK.Config(siteId: siteId, appLanguage: appLanguage)
-  
+
   setClickioLogging(true)
 
   DispatchQueue.main.async {
@@ -68,6 +67,7 @@ func initializeConsentSDK(_ options: NSDictionary,
     }
   }
 }
+
 
  @objc func openDialog(_ callback: @escaping RCTResponseSenderBlock) {
   DispatchQueue.main.async {

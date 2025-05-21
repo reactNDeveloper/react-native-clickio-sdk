@@ -10,7 +10,7 @@
 RCT_EXTERN_METHOD(testConnection:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(initializeConsentSDK:(NSDictionary *)options
                   resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)RCT_EXTERN_METHOD(openDialog:(RCTResponseSenderBlock)callback)
+                  reject:(RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(getConsentData:(RCTResponseSenderBlock)callback)
 RCT_EXTERN_METHOD(requestATTPermission:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)

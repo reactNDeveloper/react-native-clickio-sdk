@@ -193,17 +193,18 @@ func initializeConsentSDK(_ options: NSDictionary,
   resolve(available)
      
    }
-   private func getGoogleConsentMode(result: Any) {
-     let exportDataPrivate = ClickioConsentSDKManager.ExportData()
-    let googleConsent = exportDataPrivate.getGoogleConsentMode()
-    let formatted = """
-      Analytics Storage: \(googleConsent?.analyticsStorageGranted ?? false),
-      Ad Storage: \(googleConsent?.adStorageGranted ?? false),
-      Ad User Data: \(googleConsent?.adUserDataGranted ?? false),
-      Ad Personalization: \(googleConsent?.adPersonalizationGranted ?? false)
-      """
-
-    result(formatted)
-  }
+   @objc
+  func getGoogleConsentMode(_ resolve: @escaping RCTPromiseResolveBlock,
+                                   rejecter reject: @escaping RCTPromiseRejectBlock) {
+  let exportDataPrivate = ClickioConsentSDKManager.ExportData()
+  let googleConsent = exportDataPrivate.getGoogleConsentMode()
+  let formatted = """
+    Analytics Storage: \(googleConsent?.analyticsStorageGranted ?? false),
+    Ad Storage: \(googleConsent?.adStorageGranted ?? false),
+    Ad User Data: \(googleConsent?.adUserDataGranted ?? false),
+    Ad Personalization: \(googleConsent?.adPersonalizationGranted ?? false)
+    """
+  resolve(formatted)
+}
 
 }

@@ -79,20 +79,13 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
   }
 };
 
-const resetAppData = (siteId, language) => {
+const resetAppData = async (siteId, language) => {
   if (isIOS) {
     ClickioConsentManagerModule.resetData().then((res) => {
       initializeSDK(siteId, language);
     });
   } else {
-    NativeModule.resetSDK()
-      .then(() => {
-        initializeSDK(siteId, language);
-        // "SDK preferences cleared."
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    await NativeModule.resetSDK();
   }
 };
 // ---------- Logging (Android only) ----------

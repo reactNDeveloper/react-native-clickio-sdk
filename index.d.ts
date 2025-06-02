@@ -30,5 +30,5 @@ declare module "react-native-clickio-sdk" {
   ): void;
   export function syncClickioConsentWithFirebase(): Promise<any>;
   export function getGoogleConsentFlagsAndroid(): Promise<any>;
-  export function resetAppData(): void;
+  export function resetAppData(): Promise<void>;
 }

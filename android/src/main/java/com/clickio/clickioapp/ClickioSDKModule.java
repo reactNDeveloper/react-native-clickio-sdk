@@ -53,11 +53,16 @@ public class ClickioSDKModule extends ReactContextBaseJavaModule {
 
 @ReactMethod
 public void onReady(String dialogModeStr, Callback callback) {
-     Log.d(TAG, "onReady called from JS with mode: " + dialogModeStr);
-    ClickioConsentSDK.Companion.getInstance().onReady(() -> {
-         Log.d(TAG, "onReady callback triggered");
+    Log.d(TAG, "onReady called from JS with mode: " + dialogModeStr);
+
+    ClickioConsentSDK sdk = ClickioConsentSDK.Companion.getInstance();
+    Log.d(TAG, "Got SDK instance: " + sdk);
+
+    sdk.onReady(() -> {
+        Log.d(TAG, "onReady callback triggered");
+
         callback.invoke("SDK is ready!");
-        Log.d(TAG, "SDK initialized onReady");
+        Log.d(TAG, "Callback invoked");
 
         Context context = getCurrentActivity();
         if (context != null) {
@@ -66,16 +71,21 @@ public void onReady(String dialogModeStr, Callback callback) {
             try {
                 dialogMode = ClickioConsentSDK.DialogMode.valueOf(dialogModeStr.toUpperCase());
             } catch (IllegalArgumentException e) {
-                Log.w(TAG, "Invalid dialog mode string passed: " + dialogModeStr + ". Falling back to DEFAULT.");
+                Log.w(TAG, "Invalid dialog mode string passed: " + dialogModeStr);
             }
 
-            ClickioConsentSDK.Companion.getInstance().openDialog(context, dialogMode);
+            sdk.openDialog(context, dialogMode);
             logToJS("Consent dialog opened with mode: " + dialogMode.name());
+        } else {
+            Log.w(TAG, "getCurrentActivity() returned null");
         }
 
         return null;
     });
+
+    Log.d(TAG, "sdk.onReady() registered the lambda");
 }
+
 
     @ReactMethod
     public void startLoggingLogsFromAndroid() {

@@ -86,8 +86,8 @@ const resetAppData = (siteId, language) => {
     });
   } else {
     NativeModule.resetSDK()
-      .then((res) => {
-        initializeSDKandroid(siteId, language);
+      .then(() => {
+        initializeSDK(siteId, language);
         // "SDK preferences cleared."
       })
       .catch((err) => {

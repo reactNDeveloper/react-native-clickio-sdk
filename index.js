@@ -90,7 +90,7 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
 const onReady = (dialogMode) => {
   return new Promise((resolve, reject) => {
     try {
-      ClickioSDK.onReady(dialogMode, (message) => {
+      NativeModules.onReady(dialogMode, (message) => {
         resolve(message);
       });
     } catch (error) {

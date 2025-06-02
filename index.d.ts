@@ -4,6 +4,8 @@ declare module "react-native-clickio-sdk" {
     language?: string,
     mode?: string
   ): Promise<any>;
+
+  export function onReady(onReady?: string): Promise<any>;
   export function openConsentDialog(): Promise<any>;
   export function startLoggingLogsFromAndroid(): void;
   export function listenToLogs(callback: (msg: string) => void): any;

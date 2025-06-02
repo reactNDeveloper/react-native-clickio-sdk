@@ -79,6 +79,25 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
   }
 };
 
+// ---------- Android ONready  ----------
+/**
+ * Initializes the SDK and triggers the consent dialog.
+ * Supports both iOS and Android with platform-specific handling.
+ * @param {string} dialogMode - The site ID for SDK initialization.
+ * @param {string} language - Language for the SDK (default: "en").
+ * @param {string} mode
+ */
+export const onReady = (dialogMode) => {
+  return new Promise((resolve, reject) => {
+    try {
+      ClickioConsentSDK.onReady(dialogMode, (message) => {
+        resolve(message); // "SDK is ready!"
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 const resetAppData = async (siteId, language) => {
   if (isIOS) {
     ClickioConsentManagerModule.resetData().then((res) => {
@@ -248,4 +267,5 @@ module.exports = {
   syncClickioConsentWithFirebase,
   getGoogleConsentFlagsAndroid,
   resetAppData,
+  onReady,
 };

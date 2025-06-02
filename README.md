@@ -106,7 +106,7 @@ import {
 } from "react-native-clickio-sdk";
 
 const initConsent = async () => {
-  const result = await initializeSDK("your-site-id", "en");
+  const result = await initializeSDK("your-site-id", "en", "default");
   console.log(result); // ClickioConsentSDK initialized
 };
 ```

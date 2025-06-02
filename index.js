@@ -45,6 +45,7 @@ const openConsentDialog = (mode) => {
  * Supports both iOS and Android with platform-specific handling.
  * @param {string} siteId - The site ID for SDK initialization.
  * @param {string} language - Language for the SDK (default: "en").
+ * @param {string} mode
  */
 const initializeSDK = async (siteId, language = "en", mode = "default") => {
   if (isIOS) {

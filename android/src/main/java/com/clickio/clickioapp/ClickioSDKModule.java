@@ -53,6 +53,7 @@ public class ClickioSDKModule extends ReactContextBaseJavaModule {
 
 @ReactMethod
 public void onReady(String dialogModeStr, Callback callback) {
+     Log.d(TAG, "onReady started");
     ClickioConsentSDK.Companion.getInstance().onReady(() -> {
         callback.invoke("SDK is ready!");
         Log.d(TAG, "SDK initialized onReady");

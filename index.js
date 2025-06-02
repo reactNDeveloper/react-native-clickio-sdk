@@ -90,7 +90,7 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
 export const onReady = (dialogMode) => {
   return new Promise((resolve, reject) => {
     try {
-      ClickioConsentSDK.onReady(dialogMode, (message) => {
+      NativeModule.onReady(dialogMode, (message) => {
         resolve(message); // "SDK is ready!"
       });
     } catch (error) {

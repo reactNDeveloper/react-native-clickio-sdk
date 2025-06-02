@@ -51,7 +51,7 @@ public class ClickioSDKModule extends ReactContextBaseJavaModule {
         Log.d(TAG, "SDK initialized with language: " + configLanguage);
     }
 
- @ReactMethod
+@ReactMethod
 public void onReady(String dialogModeStr, Callback callback) {
     ClickioConsentSDK.Companion.getInstance().onReady(() -> {
         callback.invoke("SDK is ready!");

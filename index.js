@@ -84,8 +84,8 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
  * Initializes the SDK and triggers the consent dialog.
  * Supports both iOS and Android with platform-specific handling.
  * @param {string} dialogMode - The site ID for SDK initialization.
- * @param {string} language - Language for the SDK (default: "en").
- * @param {string} mode
+ * @returns {Promise<string>} Resolves when SDK is ready
+
  */
 export const onReady = (dialogMode) => {
   return new Promise((resolve, reject) => {

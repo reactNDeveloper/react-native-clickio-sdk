@@ -5,7 +5,14 @@ declare module "react-native-clickio-sdk" {
     mode?: string
   ): Promise<any>;
 
-  export function onReady(onReady?: string): Promise<any>;
+  type ConsentDialogMode = "DEFAULT" | "RESURFACE";
+
+  /**
+   * Waits for the SDK to be ready and opens the consent dialog in the specified mode.
+   * @param dialogMode - Mode to display the consent dialog in.
+   * @returns Promise that resolves when the SDK is ready.
+   */
+  export function onReady(dialogMode?: ConsentDialogMode): Promise<string>;
   export function openConsentDialog(): Promise<any>;
   export function startLoggingLogsFromAndroid(): void;
   export function listenToLogs(callback: (msg: string) => void): any;

@@ -90,7 +90,7 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
 const onReady = (dialogMode) => {
   return new Promise((resolve, reject) => {
     try {
-      NativeModules.onReady(dialogMode, (message) => {
+      NativeModule.onReady(dialogMode, (message) => {
         resolve(message);
       });
     } catch (error) {

@@ -12,7 +12,7 @@ declare module "react-native-clickio-sdk" {
    * @param dialogMode - Mode to display the consent dialog in.
    * @returns Promise that resolves when the SDK is ready.
    */
-  export function onReady(dialogMode?: ConsentDialogMode): Promise<string>;
+  export function onReady(dialogMode?: ConsentDialogMode): any;
   export function openConsentDialog(): Promise<any>;
   export function startLoggingLogsFromAndroid(): void;
   export function listenToLogs(callback: (msg: string) => void): any;

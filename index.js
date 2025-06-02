@@ -88,14 +88,8 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
 
  */
 const onReady = (dialogMode) => {
-  return new Promise((resolve, reject) => {
-    try {
-      NativeModule.onReady(dialogMode, (message) => {
-        resolve(message);
-      });
-    } catch (error) {
-      reject(error);
-    }
+  NativeModule.onReady(dialogMode, (message) => {
+    resolve(message);
   });
 };
 const resetAppData = async (siteId, language) => {

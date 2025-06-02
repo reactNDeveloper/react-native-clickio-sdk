@@ -87,16 +87,11 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
  * @returns {Promise<string>} Resolves when SDK is ready
 
  */
-export const onReady = (dialogMode, callback) => {
-  if (callback && typeof callback === "function") {
-    NativeModules.ClickioSDKModule.onReady(dialogMode, callback);
-    return;
-  }
-
+const onReady = (dialogMode) => {
   return new Promise((resolve, reject) => {
     try {
-      NativeModules.ClickioSDKModule.onReady(dialogMode, (msg) => {
-        resolve(msg);
+      ClickioSDK.onReady(dialogMode, (message) => {
+        resolve(message);
       });
     } catch (error) {
       reject(error);

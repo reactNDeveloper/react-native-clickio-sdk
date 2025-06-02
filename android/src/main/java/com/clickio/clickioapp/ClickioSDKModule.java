@@ -53,7 +53,6 @@ public class ClickioSDKModule extends ReactContextBaseJavaModule {
 
 @ReactMethod
 public void onReady(String dialogModeStr, Callback callback) {
-       Log.d("ClickioSDK", "onReady called with mode: " + dialogModeStr);
     ClickioConsentSDK.Companion.getInstance().onReady(() -> {
         callback.invoke("SDK is ready!");
         Log.d(TAG, "SDK initialized onReady");
@@ -68,9 +67,10 @@ public void onReady(String dialogModeStr, Callback callback) {
                 Log.w(TAG, "Invalid dialog mode string passed: " + dialogModeStr + ". Falling back to DEFAULT.");
             }
 
-            ClickioConsentSDK.Companion.getInstance().openDialog(context, ClickioConsentSDK.DialogMode.RESURFACE);
-            logToJS("Consent dialog opened with mode: " + ClickioConsentSDK.DialogMode.RESURFACE);
+            ClickioConsentSDK.Companion.getInstance().openDialog(context, dialogMode);
+            logToJS("Consent dialog opened with mode: " + dialogMode.name());
         }
+
         return null;
     });
 }

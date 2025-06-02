@@ -89,9 +89,18 @@ const initializeSDK = async (siteId, language = "en", mode = "default") => {
  */
 export const onReady = (dialogMode) => {
   return new Promise((resolve, reject) => {
+    if (!dialogMode || typeof dialogMode !== "string") {
+      reject(new Error("Invalid dialog mode provided"));
+      return;
+    }
+
     try {
       NativeModule.onReady(dialogMode, (message) => {
-        resolve(message); // "SDK is ready!"
+        if (typeof message === "string") {
+          resolve(message);
+        } else {
+          reject(new Error("Invalid response from native onReady"));
+        }
       });
     } catch (error) {
       reject(error);

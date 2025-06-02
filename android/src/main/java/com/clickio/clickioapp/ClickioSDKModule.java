@@ -71,6 +71,7 @@ public void onReady(String dialogModeStr, Callback callback) {
             ClickioConsentSDK.Companion.getInstance().openDialog(context, dialogMode);
             logToJS("Consent dialog opened with mode: " + dialogMode.name());
         }
+    Log.d(TAG, "Inside Clickio onReady lambda (manual test)");
 
         return null;
     });
